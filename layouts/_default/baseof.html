@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html>
-    {{- partial "head.html" . -}}
-    <body>
-        {{- partial "header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  
+  {{/* 1. Grab the file (Make sure this path matches exactly after 'assets/') */}}
+  {{ $style := resources.Get "scss/main.scss" }}
+
+  {{/* 2. Only process it if the file actually exists */}}
+  {{ if $style }}
+      {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/main.css" }}
+      {{ $style = $style | toCSS $opts | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ else }}
+      {{/* This will print an error in your terminal if the file is missing */}}
+      {{ warnf "Style resource 'scss/main.scss' not found!" }}
+  {{ end }}
+</head>
+<body>
+  <div class="frame"> <!-- The CSS targets this for the background -->
+    <div class="page">  <!-- The CSS targets this for max-width -->
+      
+      <nav class="nav">
+        <span class="nav-brand"><span class="dot"></span>Mysch<span>k1n</span></span>
+        <div class="nav-links">
+          <!-- Links here -->
         </div>
-        {{- partial "footer.html" . -}}
-    </body>
-</html>
+      </nav>
+
+      <div class="tab-bar">
+        <a href="/" class="tab {{ if .IsHome }}active{{ end }}">home / list</a>
+        <a href="/about" class="tab">about</a>
+      </div>
+
+      <main>
+        {{ block "main" . }}{{ end }}
+      </main>
+
+    </div>
+  </div>
+</body>
