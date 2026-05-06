@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>stateless</title>
-    <link>/</link>
-    <description>Recent content on stateless</description>
+    <title>Posts on stateless</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on stateless</description>
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Copyright © 2020, Jane Doe.</copyright>
     <lastBuildDate>Mon, 01 Dec 2025 10:00:00 +0100</lastBuildDate>
-    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
       <link>/posts/my-first-post/</link>

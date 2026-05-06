@@ -1,17 +1,15 @@
 baseURL = "https://example.com"
 
-# The name of this wonderful theme ;-).
 theme = 'stateless'
 
-# Basic metadata configuration for your blog.
 title = "stateless"
 author = "Jane Doe"
 copyright = "Copyright © 2020, Jane Doe."
 languageCode = "en-US"
 
-[permalinks]
-  blog = "/:slug/"
-  tags = "/blog/:slug"
+[params]
+  description = "Sociology in the cyberspace, Cybernetics and anticapitalist rants"
+  sourceURL = "https://github.com/Eiafuawn/stateless"
 
 [module]
   [[module.mounts]]
@@ -26,3 +24,18 @@ languageCode = "en-US"
   [[module.mounts]]
     source = "../layouts"
     target = "layouts"
+
+[[menus.main]]
+  name = "writing"
+  url = "/posts"
+  weight = 1
+
+[[menus.main]]
+  name = "projects"
+  url = "/projects"
+  weight = 2
+
+[[menus.main]]
+  name = "about"
+  url = "/about"
+  weight = 3

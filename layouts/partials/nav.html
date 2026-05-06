@@ -1,4 +1,13 @@
-<div class="tab-bar">
-  <a href="/" class="tab {{ if .IsHome }}active{{ end }}">home / list</a>
-  <a href="/about" class="tab {{ if eq .RelPermalink "/about/" }}active{{ end }}">about</a>
-</div>
+<nav class="nav">
+  <a class="nav-brand" href="/">
+    <span class="dot"></span>{{ .Site.Title }}
+  </a>
+  <div class="nav-links">
+    {{ range .Site.Menus.main }}
+      <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+    {{ end }}
+    <a class="nav-link rss" href="/index.xml">RSS</a>
+  </div>
+  <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+  <label for="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Theme">// light</label>
+</nav>

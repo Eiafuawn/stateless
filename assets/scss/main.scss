@@ -1,61 +1,109 @@
-@use 'variables';
+/* 1. INITIAL SYSTEM DEFAULTS (Dark Mode) */
+:root {
+  --bg:     #080908; 
+  --bg2:    #18171a; 
+  --ink:    #eae2d9; 
+  --ink2:   #eee5dc; 
+  --ink3:   #888880; 
+  --red:    #e72424; 
+  --border: #2e2e28; 
+  --mono:   'Courier New', Courier, monospace;
+  --sans:   system-ui, -apple-system, sans-serif;
+}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* 2. THE SECRET MECHANISM: If the button is checked, override to Cream Mode */
+:root:has(#theme-toggle:checked) {
+  --bg:     #eae2d9; 
+  --bg2:    #eee5dc; 
+  --ink:    #080908; 
+  --ink2:   #18171a; 
+  --ink3:   #4a4a44; 
+  --border: #c8c2b4;
+}
+
+/* 3. BUTTON STYLING */
+
+// Hide the actual ugly browser checkbox completely
+.theme-toggle-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Style the label to look like a clean, minimal text button
+.theme-toggle-btn {
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  
+  &:hover {
+    color: var(--red);
+  }
+}
+
+// Dynamically change the button text based on state!
+:root:has(#theme-toggle:checked) .theme-toggle-btn {
+  font-size: 0; // Hide the word "// light"
+  
+  &::before {
+    content: "// dark"; // Replace it with "// dark"
+    font-size: 12px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: system-ui, sans-serif;
+  font-family: var(--sans);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
-.frame { 
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--red);
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.frame {
   background: var(--bg);
-  font-family: var(--sans);
-  color: var(--ink);
-  padding: 0;
-  border-radius: 8px;
-  overflow: hidden; 
+  min-height: 100vh;
 }
 
 .page {
-  max-width: 660px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 1.75rem 1.25rem 2rem;
+  padding: 1.75rem 1.25rem 3rem;
 }
 
-/* tabs */
-.tab-bar {
-  display: flex;
-  gap: 0;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.tab { padding: 5px 0;
-  font-size: 12px;
-  color: var(--ink3);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  margin-right: 1.25rem;
-  font-family: var(--mono);
-  letter-spacing: 0.03em;
-}
-
-.tab.active {
-  color: var(--red);
-  border-bottom-color: var(--red);
-}
-
-.section {
-  display: none;
-}
-
-.section.active {
-  display: block;
-}
-
-/* NAV */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -71,10 +119,23 @@ body {
   font-weight: bold;
   color: var(--ink);
   letter-spacing: -0.01em;
+
+  span {
+    color: var(--red);
+  }
 }
 
-.nav-brand span {
-  color: var(--red);
+// the small red dot before the brand name
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--red);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 
 .nav-links {
@@ -88,22 +149,56 @@ body {
   font-family: var(--mono);
   color: var(--ink2);
   text-decoration: none;
+
+  &:hover {
+    color: var(--red);
+  }
+
+  // RSS badge
+  &.rss {
+    color: var(--red);
+    font-weight: bold;
+    font-size: 11px;
+    border: 1px solid var(--red);
+    padding: 2px 6px;
+    border-radius: 2px;
+
+    &:hover {
+      background: var(--red);
+      color: var(--bg);
+    }
+  }
 }
 
-.nav-link:hover {
-  color: var(--red);
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.nav-link.rss {
-  color: var(--red);
-  font-weight: bold;
-  font-size: 11px;
-  border: 1px solid var(--red);
-  padding: 2px 6px;
-  border-radius: 2px;
+.tab {
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--ink3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  margin-right: 1.25rem;
+  font-family: var(--mono);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ink);
+  }
+
+  &.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
 }
 
-/* POST LIST */
 .list-header {
   margin-bottom: 1.5rem;
 }
@@ -122,12 +217,10 @@ body {
   color: var(--ink2);
 }
 
-
 .post-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .post-item {
@@ -136,12 +229,13 @@ body {
   align-items: flex-start;
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.post-item:last-child {
-  border-bottom: none;
-}
-
+// thumbnail — 56×56 square
 .post-thumb {
   width: 56px;
   height: 56px;
@@ -153,22 +247,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-}
 
-.post-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.post-thumb.placeholder {
-  font-size: 11px;
-  font-family: var(--mono);
-  color: var(--ink3);
-  text-align: center;
-  padding: 4px;
-  line-height: 1.3;
+  // fallback when no cover image is set
+  &.placeholder {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--ink3);
+    text-align: center;
+    line-height: 1.3;
+    padding: 4px;
+  }
 }
 
 .post-info {
@@ -184,10 +278,10 @@ body {
   line-height: 1.35;
   display: block;
   margin-bottom: 4px;
-}
 
-.post-title:hover {
-  color: var(--red);
+  &:hover {
+    color: var(--red);
+  }
 }
 
 .post-bottom {
@@ -206,11 +300,11 @@ body {
   font-size: 10px;
   font-family: var(--mono);
   color: var(--ink3);
-}
 
-.tag::before {
-  content: '#';
-  color: var(--red);
+  &::before {
+    content: '#';
+    color: var(--red);
+  }
 }
 
 .post-date {
@@ -220,7 +314,6 @@ body {
   white-space: nowrap;
 }
 
-/* SINGLE POST */
 .post-header {
   padding-bottom: 1.25rem;
   margin-bottom: 1.5rem;
@@ -252,57 +345,120 @@ body {
   gap: 12px;
 }
 
+// optional full-width cover image on single post
 .post-hero {
   width: 100%;
-  height: 180px;
-  background: var(--bg2);
+  max-height: 400px;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 3px;
   margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
-.hero-placeholder {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink3);
-}
-
+// prose content rendered from markdown
 .post-body {
   font-size: 15px;
   line-height: 1.75;
   color: var(--ink);
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--mono);
+    margin: 1.75rem 0 0.5rem;
+    color: var(--ink);
+    border-left: 3px solid var(--red);
+    padding-left: 10px;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--mono);
+    margin: 1.5rem 0 0.4rem;
+    color: var(--ink2);
+  }
+
+  a {
+    color: var(--red);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: 1rem;
+    color: var(--ink2);
+    font-style: italic;
+    margin: 1.25rem 0;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1px 5px;
+  }
+
+  pre {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-family: var(--mono);
+    overflow-x: auto;
+    margin: 1rem 0;
+
+    // reset inline code styles inside pre
+    code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: inherit;
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    margin: 1rem 0;
+  }
 }
 
-.post-body p {
-  margin-bottom: 1rem;
-}
-
-.post-body h2 {
-  font-size: 15px;
-  font-weight: 700;
-  font-family: var(--mono);
-  margin: 1.75rem 0 0.5rem;
-  color: var(--ink);
-  border-left: 3px solid var(--red);
-  padding-left: 10px;
-}
-
-.code-block {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 12px 14px;
-  font-size: 12px;
-  font-family: var(--mono);
-  color: var(--ink);
-  margin: 1rem 0;
-  overflow-x: auto;
-  white-space: pre;
-}
-
+// tag pills at the bottom of a single post
 .post-footer {
   margin-top: 2rem;
   padding-top: 1rem;
@@ -320,22 +476,32 @@ body {
   padding: 2px 8px;
   border-radius: 2px;
   color: var(--ink2);
+
+  &:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
 }
 
-/* ABOUT */
 .about-body {
   font-size: 15px;
   line-height: 1.75;
   color: var(--ink);
-}
 
-.about-body p {
-  margin-bottom: 1rem;
-}
+  p {
+    margin-bottom: 1rem;
+  }
 
-.about-body strong {
-  color: var(--red);
-  font-weight: 600;
+  strong {
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--red);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 }
 
 .links-section {
@@ -360,10 +526,10 @@ body {
   border-bottom: 1px solid var(--border);
   font-size: 13px;
   font-family: var(--mono);
-}
 
-.link-row:last-child {
-  border-bottom: none;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .link-label {
@@ -372,13 +538,12 @@ body {
 
 .link-val {
   color: var(--ink);
+
+  &:hover {
+    color: var(--red);
+  }
 }
 
-.link-val:hover {
-  color: var(--red);
-}
-
-/* FOOTER */
 .footer {
   margin-top: 2.5rem;
   padding-top: 1rem;
@@ -394,26 +559,22 @@ body {
 .footer-right {
   display: flex;
   gap: 12px;
+
+  a {
+    color: var(--ink3);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--red);
+    }
+  }
 }
 
-.footer a {
-  color: var(--ink3);
-  text-decoration: none;
-}
-
-.footer a:hover {
-  color: var(--red);
-}
-
-/* little red circle decoration on nav brand */
-.dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background: var(--red);
-  border-radius: 50%;
-  margin-right: 6px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }

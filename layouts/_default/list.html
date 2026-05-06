@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="list-header">
+  <div class="list-title">// {{ .Title | lower }}</div>
+  <div class="list-desc">{{ with .Description }}{{ . }}{{ else }}{{ len .Pages }} posts{{ end }}</div>
+</div>
+
+<ul class="post-list">
+  {{ range .Pages.ByDate.Reverse }}
+  <li class="post-item">
+    {{ with .Params.cover }}
+      <div class="post-thumb">
+        <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+      </div>
+    {{ else }}
+      <div class="post-thumb placeholder">no<br>img</div>
+    {{ end }}
+
+    <div class="post-info">
+      <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <div class="post-bottom">
+        <div class="post-tags">
+          {{ range .Params.tags }}
+            <span class="tag">{{ . }}</span>
+          {{ end }}
+        </div>
+        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+      </div>
+    </div>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
