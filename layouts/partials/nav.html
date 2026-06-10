@@ -2,12 +2,18 @@
   <a class="nav-brand" href="/">
     <span class="dot"></span>{{ .Site.Title }}
   </a>
+
+  <input type="checkbox" id="menu-toggle" class="hamburger-input">
+  <label for="menu-toggle" class="hamburger-btn" title="Toggle menu" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </label>
+
   <div class="nav-links">
     {{ range .Site.Menus.main }}
       <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
     {{ end }}
     <a class="nav-link rss" href="/index.xml">RSS</a>
+    <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+    <label for="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Theme"># light</label>
   </div>
-  <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
-  <label for="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Theme">// light</label>
 </nav>

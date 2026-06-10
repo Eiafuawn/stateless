@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Categories | stateless</title>
 <meta name="description" content="Sociology in the cyberspace, Cybernetics and anticapitalist rants">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
 
 
+<link rel="stylesheet" href="/css/main.min.81ffcca69f69a157176146063ec00808c1c56b4c352a65c48f95aef0beff5c0d.css" integrity="sha256-gf/Mpp9poVcXYUYGPsAICMHFa0w1KmXEj5Wu8L7/XA0=">
 
-<link rel="stylesheet" href="/css/main.min.f156029ae959f5734950f314a9ae4d82f512410313b3b75b73c6c3716a863645.css" integrity="sha256-8VYCmulZ9XNJUPMUqa5NgvUSQQMTs7dbc8bDcWqGNkU=">
-
-<link rel="alternate" type="application/rss+xml" title="stateless" href="/index.xml">
+<link rel="alternate" type="application/rss+xml" title="stateless" href="http://localhost:1313/index.xml">
 </head>
 <body>
   <div class="frame">
@@ -20,6 +22,12 @@
   <a class="nav-brand" href="/">
     <span class="dot"></span>stateless
   </a>
+
+  <input type="checkbox" id="menu-toggle" class="hamburger-input">
+  <label for="menu-toggle" class="hamburger-btn" title="Toggle menu" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </label>
+
   <div class="nav-links">
     
       <a class="nav-link" href="/posts">writing</a>
@@ -29,9 +37,9 @@
       <a class="nav-link" href="/about">about</a>
     
     <a class="nav-link rss" href="/index.xml">RSS</a>
+    <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+    <label for="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Theme"># light</label>
   </div>
-  <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
-  <label for="theme-toggle" class="nav-link theme-toggle-btn" title="Toggle Theme">// light</label>
 </nav>
       <main>
         
@@ -46,7 +54,7 @@
 
       </main>
       <footer class="footer">
-  <span>no rights reserved — copy freely</span>
+  <span>MIT</span>
   <div class="footer-right">
     <a href="/index.xml">rss</a>
     <a href="https://github.com/Eiafuawn/stateless">source</a>

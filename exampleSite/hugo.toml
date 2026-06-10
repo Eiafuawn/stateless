@@ -3,8 +3,8 @@ baseURL = "https://example.com"
 theme = 'stateless'
 
 title = "stateless"
-author = "Jane Doe"
-copyright = "Copyright © 2020, Jane Doe."
+author = "Myshkin"
+copyright = "MIT"
 languageCode = "en-US"
 
 [params]

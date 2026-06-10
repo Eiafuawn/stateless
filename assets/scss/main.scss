@@ -7,7 +7,7 @@
   --ink3:   #888880; 
   --red:    #e72424; 
   --border: #2e2e28; 
-  --mono:   'Courier New', Courier, monospace;
+  --mono:   'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
   --sans:   system-ui, -apple-system, sans-serif;
 }
 
@@ -50,10 +50,10 @@
 
 // Dynamically change the button text based on state!
 :root:has(#theme-toggle:checked) .theme-toggle-btn {
-  font-size: 0; // Hide the word "// light"
+  font-size: 0; 
   
   &::before {
-    content: "// dark"; // Replace it with "// dark"
+    content: "# dark";
     font-size: 12px;
   }
 }
@@ -99,7 +99,7 @@ img {
 }
 
 .page {
-  max-width: 1000px;
+  max-width: 80%;
   margin: 0 auto;
   padding: 1.75rem 1.25rem 3rem;
 }
@@ -196,6 +196,71 @@ img {
   &.active {
     color: var(--red);
     border-bottom-color: var(--red);
+  }
+}
+
+.hamburger-input {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  margin: -1px; border: 0;
+}
+
+.hamburger-btn {
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 28px; height: 28px;
+  padding: 2px;
+
+  span {
+    display: block;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 1px;
+    transition: transform .2s, opacity .2s;
+  }
+}
+
+.nav {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: .75rem;
+    padding-top: .5rem;
+  }
+
+  .nav-link {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    font-size: 13px;
+
+    &:last-child { border-bottom: none; }
+  }
+
+  #menu-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+
+  #menu-toggle:checked + .hamburger-btn {
+    span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   }
 }
 
